@@ -19,9 +19,11 @@ module.exports = fountain.Base.extend({
         choices: [
           {name: 'A working landing page', value: 'techs'},
           {name: 'Just a Hello World', value: 'hello'},
-          {name: 'Redux TodoMVC', value: 'todoMVC'}
+          {name: 'Redux TodoMVC', value: 'todoMVC'},
+          {name: 'Redux asyncApp', value: 'asyncApp'}
         ]
-      }, {
+      },
+      {
         when: !this.options.router,
         type: 'list',
         name: 'router',
@@ -51,6 +53,8 @@ module.exports = fountain.Base.extend({
           'react-dom': '^15.4.2'
         },
         devDependencies: {
+          'webpack': '1.13.1',
+          'extract-text-webpack-plugin': '1.0.1',
           'react-addons-test-utils': '^15.4.2',
           '@types/react': '^15.0.11',
           '@types/react-dom': '^0.14.23',
@@ -95,7 +99,7 @@ module.exports = fountain.Base.extend({
       skipCache: this.props.skipCache
     };
 
-    const modules = this.props.sample === 'todoMVC' ? `/${this.props.modules === 'inject' ? 'inject' : 'modules'}` : '';
+    const modules = this.props.sample === 'todoMVC' || 'asyncApp' ? `/${this.props.modules === 'inject' ? 'inject' : 'modules'}` : '';
 
     this.composeWith(require.resolve(`../${this.props.sample}${modules}`), options);
     this.composeWith(require.resolve('generator-fountain-gulp/generators/app'), options);
@@ -103,5 +107,11 @@ module.exports = fountain.Base.extend({
 
   writing() {
     this.copyTemplate('src/index.html', 'src/index.html');
+    this.mergeJson('package.json', {
+      devDependencies: {
+        'webpack': '1.13.1',
+        'extract-text-webpack-plugin': '1.0.1'
+      }
+    });
   }
 });

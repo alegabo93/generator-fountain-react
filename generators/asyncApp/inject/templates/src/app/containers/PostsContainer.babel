@@ -1,0 +1,39 @@
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {getPosts} from '../actions/Posts';
+import PropTypes from 'prop-types';
+
+import Posts from '../components/Posts';
+
+const loadData = ({getPosts}) => {
+  getPosts();
+};
+
+class PostsContainer extends Component {
+  componentWillMount() {
+    loadData(this.props);
+  }
+
+  render() {
+    const {posts} = this.props;
+
+    return (
+      <Posts posts={posts.data}/>
+    );
+  }
+}
+
+PostsContainer.propTypes = {
+  posts: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => {
+  const {posts} = state;
+  return {
+    posts
+  };
+};
+
+export default connect(mapStateToProps, {
+  getPosts
+})(PostsContainer);

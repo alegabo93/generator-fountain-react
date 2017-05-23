@@ -1,0 +1,8 @@
+import axios from 'axios';
+
+export const getPosts = () => {
+  return {
+    type: 'POSTS',
+    payload: axios.get('/posts')
+  };
+};

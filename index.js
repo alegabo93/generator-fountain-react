@@ -3,5 +3,6 @@ module.exports = {
   component: require.resolve('./generators/component'),
   hello: require.resolve('./generators/hello'),
   techs: require.resolve('./generators/techs'),
-  todoMVC: require.resolve('./generators/todoMVC')
+  todoMVC: require.resolve('./generators/todoMVC'),
+  asyncApp: require.resolve('./generators/asyncApp')
 };

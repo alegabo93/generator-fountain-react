@@ -1,0 +1,20 @@
+import React, {Component} from 'react';
+import {Grid, Row, Col} from 'react-bootstrap';
+
+import PostsContainer from './PostsContainer';
+
+class App extends Component {
+  render() {
+    return (
+      <Grid>
+        <Row>
+          <Col md={12}>
+            <PostsContainer/>
+          </Col>
+        </Row>
+      </Grid>
+    );
+  }
+}
+
+export default App;
